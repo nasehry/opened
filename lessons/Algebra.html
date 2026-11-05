@@ -1,0 +1,662 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basic Algebra Academy</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f5fa;
+    color: #252b3a;
+}
+
+header {
+    background: #00695c;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 { margin: 0; }
+
+nav {
+    background: #004d40;
+    padding: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+nav button {
+    background: transparent;
+    border: 1px solid #80cbc4;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+nav button:hover { background: #00796b; }
+
+main {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 15px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px #00000010;
+}
+
+h2 { color: #00796b; }
+
+.example {
+    background: #e0f2f1;
+    padding: 17px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 22px;
+    margin: 15px 0;
+}
+
+.lesson { display: none; }
+.lesson.active { display: block; }
+
+.action {
+    background: #00796b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 4px;
+}
+
+.action:hover { background: #004d40; }
+
+input {
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 17px;
+    width: 180px;
+}
+
+#feedback {
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.progress {
+    background: #ddd;
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+}
+
+#progressBar {
+    background: #43a047;
+    height: 100%;
+    width: 0%;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}
+
+.step {
+    background: #f5f5f5;
+    padding: 12px;
+    margin: 8px 0;
+    border-left: 4px solid #00796b;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📐 Basic Algebra Academy</h1>
+    <p>Learn algebra step by step!</p>
+</header>
+
+<nav>
+    <button onclick="showLesson('home')">Home</button>
+    <button onclick="showLesson('variables')">Variables</button>
+    <button onclick="showLesson('simplifying')">Simplifying</button>
+    <button onclick="showLesson('like')">Like Terms</button>
+    <button onclick="showLesson('distributive')">Distributive</button>
+    <button onclick="showLesson('one')">One-Step</button>
+    <button onclick="showLesson('two')">Two-Step</button>
+    <button onclick="showLesson('inequalities')">Inequalities</button>
+    <button onclick="showLesson('practice')">Practice</button>
+</nav>
+
+<main>
+
+<!-- HOME -->
+
+<section id="home" class="lesson active">
+<div class="card">
+    <h2>OpenEducation Presents: Algebra Academy</h2>
+    <h2>Welcome to Algebra Academy!</h2>
+
+    <p>Algebra is a branch of mathematics where letters and symbols represent unknown numbers.</p>
+
+    <h3>What will you learn?</h3>
+    <ul>
+        <li>Variables and algebraic expressions</li>
+        <li>Simplifying expressions</li>
+        <li>Combining like terms</li>
+        <li>The distributive property</li>
+        <li>Solving equations</li>
+        <li>Solving inequalities</li>
+    </ul>
+
+    <button class="action" onclick="showLesson('variables')">
+        Start learning →
+    </button>
+</div>
+
+<div class="card">
+    <h2>Your progress</h2>
+    <p>Questions attempted: <span id="total">0</span></p>
+    <p>Correct answers: <span id="correct">0</span></p>
+    <div class="progress">
+        <div id="progressBar"></div>
+    </div>
+</div>
+</section>
+
+<!-- VARIABLES -->
+
+<section id="variables" class="lesson">
+<div class="card">
+    <h2>1. Variables and Expressions</h2>
+
+    <p>A variable is a letter that represents an unknown or changing number.</p>
+
+    <div class="example">
+        x = 5
+    </div>
+
+    <p>In this example, the variable x represents the number 5.</p>
+
+    <h3>Algebraic expressions</h3>
+    <p>An expression is a mathematical phrase containing numbers, variables, and operations.</p>
+
+    <div class="example">
+        x + 3
+    </div>
+
+    <p>If x = 5, then:</p>
+
+    <div class="example">
+        5 + 3 = 8
+    </div>
+
+    <h3>Multiplication notation</h3>
+    <p>In algebra, multiplication is often written without the multiplication sign.</p>
+
+    <div class="example">
+        3 × x = 3x
+    </div>
+
+    <h3>Important vocabulary</h3>
+    <ul>
+        <li><b>Variable:</b> A letter representing a number.</li>
+        <li><b>Coefficient:</b> The number multiplying a variable.</li>
+        <li><b>Constant:</b> A number without a variable.</li>
+        <li><b>Expression:</b> Numbers and operations without an equals sign.</li>
+    </ul>
+
+    <div class="example">
+        7x + 4
+    </div>
+
+    <p>7 is the coefficient, x is the variable, and 4 is the constant.</p>
+</div>
+<button class="action" onclick="showLesson('simplifying')">Next lesson →</button>
+</section>
+
+<!-- SIMPLIFYING -->
+
+<section id="simplifying" class="lesson">
+<div class="card">
+    <h2>2. Simplifying Expressions</h2>
+
+    <p>Simplifying means rewriting an expression in its simplest equivalent form.</p>
+
+    <h3>Example 1</h3>
+
+    <div class="example">
+        3 + 4 + 2
+    </div>
+
+    <p>Add the numbers together:</p>
+    <div class="example">9</div>
+
+    <h3>Example 2</h3>
+
+    <div class="example">
+        2x + 3x
+    </div>
+
+    <p>Since both terms contain x, add their coefficients:</p>
+
+    <div class="step">2x + 3x</div>
+    <div class="step">(2 + 3)x</div>
+    <div class="step">5x</div>
+
+    <h3>Example 3</h3>
+
+    <div class="example">
+        4x + 3 + 2x + 5
+    </div>
+
+    <p>Group the variable terms and constants:</p>
+    <div class="step">4x + 2x + 3 + 5</div>
+    <div class="step">6x + 8</div>
+
+    <b>Answer: 6x + 8</b>
+</div>
+<button class="action" onclick="showLesson('like')">Next lesson →</button>
+</section>
+
+<!-- LIKE TERMS -->
+
+<section id="like" class="lesson">
+<div class="card">
+    <h2>3. Combining Like Terms</h2>
+
+    <p>Like terms are terms that have exactly the same variables raised to the same powers.</p>
+
+    <h3>Like terms</h3>
+    <div class="example">
+        3x and 7x
+    </div>
+    <p>These can be combined because they both contain x.</p>
+
+    <h3>Unlike terms</h3>
+    <div class="example">
+        3x and 7y
+    </div>
+    <p>These cannot be combined because their variables are different.</p>
+
+    <h3>More examples</h3>
+
+    <div class="example">
+        5x + 2x = 7x
+    </div>
+
+    <div class="example">
+        8y - 3y = 5y
+    </div>
+
+    <div class="example">
+        4x + 3y + 2x = 6x + 3y
+    </div>
+
+    <p><b>Remember:</b> You can only add or subtract the coefficients of like terms.</p>
+</div>
+<button class="action" onclick="showLesson('distributive')">Next lesson →</button>
+</section>
+
+<!-- DISTRIBUTIVE -->
+
+<section id="distributive" class="lesson">
+<div class="card">
+    <h2>4. The Distributive Property</h2>
+
+    <p>The distributive property allows you to multiply a number by everything inside parentheses.</p>
+
+    <div class="example">
+        a(b + c) = ab + ac
+    </div>
+
+    <h3>Example 1</h3>
+
+    <div class="example">
+        3(x + 4)
+    </div>
+
+    <div class="step">Multiply 3 by x: 3x</div>
+    <div class="step">Multiply 3 by 4: 12</div>
+    <div class="step">Combine: 3x + 12</div>
+
+    <b>Answer: 3x + 12</b>
+
+    <h3>Example 2: Negative numbers</h3>
+
+    <div class="example">
+        -2(x - 5)
+    </div>
+
+    <div class="step">-2 × x = -2x</div>
+    <div class="step">-2 × -5 = +10</div>
+
+    <b>Answer: -2x + 10</b>
+
+    <p>Be careful with negative signs!</p>
+</div>
+<button class="action" onclick="showLesson('one')">Next lesson →</button>
+</section>
+
+<!-- ONE STEP -->
+
+<section id="one" class="lesson">
+<div class="card">
+    <h2>5. Solving One-Step Equations</h2>
+
+    <p>An equation states that two expressions are equal.</p>
+
+    <p>The goal is to find the value of the variable.</p>
+
+    <h3>Example 1: Addition</h3>
+
+    <div class="example">x + 5 = 12</div>
+
+    <p>Subtract 5 from both sides:</p>
+
+    <div class="step">x + 5 - 5 = 12 - 5</div>
+    <div class="step">x = 7</div>
+
+    <h3>Example 2: Subtraction</h3>
+
+    <div class="example">x - 4 = 10</div>
+
+    <p>Add 4 to both sides:</p>
+    <div class="example">x = 14</div>
+
+    <h3>Example 3: Multiplication</h3>
+
+    <div class="example">3x = 18</div>
+
+    <p>Divide both sides by 3:</p>
+    <div class="example">x = 6</div>
+
+    <h3>Example 4: Division</h3>
+
+    <div class="example">x / 4 = 5</div>
+
+    <p>Multiply both sides by 4:</p>
+    <div class="example">x = 20</div>
+
+    <p><b>Important:</b> Whatever operation you perform on one side, perform it on the other side too.</p>
+</div>
+<button class="action" onclick="showLesson('two')">Next lesson →</button>
+</section>
+
+<!-- TWO STEP -->
+
+<section id="two" class="lesson">
+<div class="card">
+    <h2>6. Solving Two-Step Equations</h2>
+
+    <p>Two-step equations require two inverse operations to isolate the variable.</p>
+
+    <h3>Example</h3>
+
+    <div class="example">
+        3x + 5 = 20
+    </div>
+
+    <p><b>Step 1:</b> Subtract 5 from both sides.</p>
+    <div class="step">3x + 5 - 5 = 20 - 5</div>
+    <div class="step">3x = 15</div>
+
+    <p><b>Step 2:</b> Divide both sides by 3.</p>
+    <div class="step">3x / 3 = 15 / 3</div>
+    <div class="step">x = 5</div>
+
+    <h3>Another example</h3>
+
+    <div class="example">
+        2x - 7 = 9
+    </div>
+
+    <div class="step">Add 7 to both sides: 2x = 16</div>
+    <div class="step">Divide by 2: x = 8</div>
+
+    <b>Answer: x = 8</b>
+</div>
+<button class="action" onclick="showLesson('inequalities')">Next lesson →</button>
+</section>
+
+<!-- INEQUALITIES -->
+
+<section id="inequalities" class="lesson">
+<div class="card">
+    <h2>7. Inequalities</h2>
+
+    <p>Inequalities compare two values that may not be equal.</p>
+
+    <h3>The four main symbols</h3>
+
+    <div class="example">
+        &lt; means less than
+    </div>
+    <div class="example">
+        &gt; means greater than
+    </div>
+    <div class="example">
+        ≤ means less than or equal to
+    </div>
+    <div class="example">
+        ≥ means greater than or equal to
+    </div>
+
+    <h3>Example 1</h3>
+    <div class="example">x + 3 &gt; 8</div>
+
+    <p>Subtract 3 from both sides:</p>
+    <div class="example">x &gt; 5</div>
+
+    <p>This means x can be any number greater than 5.</p>
+
+    <h3>Important rule</h3>
+    <p>When multiplying or dividing an inequality by a negative number, reverse the inequality sign.</p>
+
+    <div class="example">
+        -2x &gt; 8
+    </div>
+
+    <p>Divide both sides by -2 and reverse the sign:</p>
+
+    <div class="example">
+        x &lt; -4
+    </div>
+</div>
+<button class="action" onclick="showLesson('practice')">Start practice →</button>
+</section>
+
+<!-- PRACTICE -->
+
+<section id="practice" class="lesson">
+<div class="card">
+    <h2>📝 Algebra Practice</h2>
+
+    <p>Solve the randomly generated algebra problem.</p>
+
+    <p>Enter the value of x.</p>
+
+    <h3 id="question">Click New Question to begin.</h3>
+
+    <input type="number" id="answer" placeholder="Value of x"
+        onkeydown="if(event.key==='Enter') checkAnswer()">
+
+    <br><br>
+
+    <button class="action" onclick="checkAnswer()">Check answer</button>
+    <button class="action" onclick="newQuestion()">New question</button>
+
+    <p id="feedback"></p>
+
+    <hr>
+
+    <h3>Your score</h3>
+    <p>Correct: <span id="score">0</span></p>
+    <p>Attempted: <span id="attempted">0</span></p>
+    <p>Accuracy: <span id="accuracy">0%</span></p>
+</div>
+</section>
+
+</main>
+
+<footer>
+    Algebra Academy | Practice makes perfect!
+</footer>
+
+<script>
+let correctAnswer = 0;
+let answered = false;
+let score = 0;
+let attempted = 0;
+
+function showLesson(id) {
+    document.querySelectorAll('.lesson').forEach(s => {
+        s.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+}
+
+function newQuestion() {
+    let type = Math.floor(Math.random() * 6);
+    let a, b, c, x;
+
+    if (type === 0) {
+        // x + a = b
+        x = Math.floor(Math.random() * 30) + 1;
+        a = Math.floor(Math.random() * 20) + 1;
+        b = x + a;
+
+        document.getElementById('question').textContent =
+            `x + ${a} = ${b}`;
+    }
+
+    else if (type === 1) {
+        // x - a = b
+        x = Math.floor(Math.random() * 30) + 1;
+        a = Math.floor(Math.random() * 20) + 1;
+        b = x - a;
+
+        document.getElementById('question').textContent =
+            `x - ${a} = ${b}`;
+    }
+
+    else if (type === 2) {
+        // ax = b
+        a = Math.floor(Math.random() * 10) + 2;
+        x = Math.floor(Math.random() * 20) + 1;
+        b = a * x;
+
+        document.getElementById('question').textContent =
+            `${a}x = ${b}`;
+    }
+
+    else if (type === 3) {
+        // x/a = b
+        a = Math.floor(Math.random() * 10) + 2;
+        x = Math.floor(Math.random() * 20) + 1;
+        b = x;
+        x = a * b;
+
+        document.getElementById('question').textContent =
+            `x / ${a} = ${b}`;
+    }
+
+    else if (type === 4) {
+        // ax + b = c
+        a = Math.floor(Math.random() * 8) + 2;
+        x = Math.floor(Math.random() * 20) + 1;
+        b = Math.floor(Math.random() * 20) + 1;
+        c = a * x + b;
+
+        document.getElementById('question').textContent =
+            `${a}x + ${b} = ${c}`;
+    }
+
+    else {
+        // ax - b = c
+        a = Math.floor(Math.random() * 8) + 2;
+        x = Math.floor(Math.random() * 20) + 1;
+        b = Math.floor(Math.random() * 20) + 1;
+        c = a * x - b;
+
+        document.getElementById('question').textContent =
+            `${a}x - ${b} = ${c}`;
+    }
+
+    correctAnswer = x;
+    answered = false;
+
+    document.getElementById('answer').value = '';
+    document.getElementById('feedback').textContent = '';
+    document.getElementById('answer').focus();
+}
+
+function checkAnswer() {
+    if (answered) {
+        document.getElementById('feedback').textContent =
+            'Already answered! Generate a new question.';
+        return;
+    }
+
+    let value = document.getElementById('answer').value;
+
+    if (value.trim() === '') {
+        document.getElementById('feedback').textContent =
+            'Please enter an answer!';
+        return;
+    }
+
+    attempted++;
+    answered = true;
+
+    if (Number(value) === correctAnswer) {
+        score++;
+        document.getElementById('feedback').textContent =
+            '✓ Correct! Excellent work!';
+        document.getElementById('feedback').style.color = 'green';
+    } else {
+        document.getElementById('feedback').textContent =
+            `✗ Incorrect. The correct answer is x = ${correctAnswer}.`;
+        document.getElementById('feedback').style.color = 'red';
+    }
+
+    updateScore();
+}
+
+function updateScore() {
+    let accuracy = attempted === 0 ? 0 :
+        Math.round(score / attempted * 100);
+
+    document.getElementById('score').textContent = score;
+    document.getElementById('attempted').textContent = attempted;
+    document.getElementById('accuracy').textContent = accuracy + '%';
+
+    document.getElementById('total').textContent = attempted;
+    document.getElementById('correct').textContent = score;
+
+    document.getElementById('progressBar').style.width =
+        accuracy + '%';
+}
+</script>
+
+</body>
+</html>
