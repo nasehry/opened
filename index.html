@@ -1,11 +1,166 @@
-<title>Project Open Education - Home</title>
-<h1>Project Open Education</h1>
-<h2>Our mission is free and quality education for all.</h2><br>
-<h3>Curriculums</h3>
-<table>
-<tr>
-<td><a href="lessons/Python.pdf"><image src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/3840px-Python-logo-notext.svg.png"><p>Python<br></p></a></td>
-<td><a href="lessons/Arithmetic.html"><image src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Arithmetic_operations.svg/250px-Arithmetic_operations.svg.png"><p>Arithmetic<br></p></a></td>
-<td><a href="lessons/Algebra.html"><image src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Graph_%28y_%3D_0.5x_-_1%29.svg/250px-Graph_%28y_%3D_0.5x_-_1%29.svg.png"><p>Algebra<br></p></a></td>
-</tr>
-</table> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Open Education - Home</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #123c69, #2563a6);
+            color: white;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #dbeafe;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1100px;
+            margin: 60px auto;
+            flex: 1;
+        }
+
+        main h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: #123c69;
+        }
+
+        .curriculums {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 30px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            transition: 0.25s ease;
+            border: 1px solid #e5eaf1;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            color: #1d4e89;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        footer {
+            background: #123c69;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px 15px;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 55px 15px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            main {
+                margin: 40px auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Project Open Education</h1>
+        <p>Our mission is free and quality education for all.</p>
+    </header>
+
+    <main>
+        <h2>Explore Our Curriculums</h2>
+
+        <div class="curriculums">
+
+            <a href="lessons/Python.pdf" class="card">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/3840px-Python-logo-notext.svg.png" alt="Python">
+                <h3>Python</h3>
+                <p>Learn programming from the ground up.</p>
+            </a>
+
+            <a href="lessons/Arithmetic.html" class="card">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Arithmetic_operations.svg/250px-Arithmetic_operations.svg.png" alt="Arithmetic">
+                <h3>Arithmetic</h3>
+                <p>Build a strong foundation in mathematics.</p>
+            </a>
+
+            <a href="lessons/Algebra.html" class="card">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Graph_%28y_%3D_0.5x_-_1%29.svg/250px-Graph_%28y_%3D_0.5x_-_1%29.svg.png" alt="Algebra">
+                <h3>Algebra</h3>
+                <p>Explore equations, variables, and graphs.</p>
+            </a>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>Project Open Education &copy; 2026</p>
+        <p>Education should be free and accessible to everyone.</p>
+    </footer>
+
+</body>
+</html>
