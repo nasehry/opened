@@ -1,0 +1,472 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arithmetic Academy</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f5fa;
+    color: #252b3a;
+}
+
+header {
+    background: #3949ab;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    background: #283593;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+}
+
+nav button {
+    background: transparent;
+    color: white;
+    border: 1px solid #9fa8da;
+    border-radius: 6px;
+    padding: 10px 16px;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background: #5c6bc0;
+}
+
+main {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 15px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 12px #00000010;
+}
+
+h2 {
+    color: #3949ab;
+}
+
+.example {
+    background: #e8eaf6;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 20px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+button.action {
+    background: #3949ab;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button.action:hover {
+    background: #283593;
+}
+
+input {
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 17px;
+    width: 150px;
+}
+
+#feedback {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.progress {
+    background: #ddd;
+    border-radius: 10px;
+    height: 12px;
+    overflow: hidden;
+}
+
+#progressBar {
+    background: #43a047;
+    height: 100%;
+    width: 0%;
+    transition: width .3s;
+}
+
+.lesson {
+    display: none;
+}
+
+.lesson.active {
+    display: block;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>OpenEducation Presents</h2>
+    <h1>📚 Arithmetic Academy</h1>
+    <p>Learn mathematics one step at a time!</p>
+</header>
+
+<nav>
+    <button onclick="showLesson('home')">Home</button>
+    <button onclick="showLesson('addition')">Addition</button>
+    <button onclick="showLesson('subtraction')">Subtraction</button>
+    <button onclick="showLesson('multiplication')">Multiplication</button>
+    <button onclick="showLesson('division')">Division</button>
+    <button onclick="showLesson('pemdas')">PEMDAS</button>
+    <button onclick="showLesson('practice')">Practice</button>
+</nav>
+
+<main>
+
+<section id="home" class="lesson active">
+    <div class="card">
+        <h2>Welcome to Arithmetic Academy!</h2>
+        <p>Arithmetic is the branch of mathematics that deals with numbers and basic operations.</p>
+        <p>In this course, you will learn five important topics:</p>
+        <ul>
+            <li>Addition – combining numbers.</li>
+            <li>Subtraction – finding the difference.</li>
+            <li>Multiplication – repeated addition.</li>
+            <li>Division – splitting numbers into equal groups.</li>
+            <li>PEMDAS – the order in which operations are performed.</li>
+        </ul>
+        <button class="action" onclick="showLesson('addition')">
+            Start learning →
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>Your progress</h2>
+        <p>Questions answered: <span id="total">0</span></p>
+        <p>Correct answers: <span id="correct">0</span></p>
+        <div class="progress">
+            <div id="progressBar"></div>
+        </div>
+    </div>
+</section>
+
+<section id="addition" class="lesson">
+    <div class="card">
+        <h2>1. Addition (+)</h2>
+        <p>Addition combines two or more numbers to find their total.</p>
+
+        <div class="example">
+            5 + 3 = 8
+        </div>
+
+        <h3>How does it work?</h3>
+        <p>Imagine you have 5 apples and receive 3 more.</p>
+        <p>You now have 8 apples!</p>
+
+        <h3>Important properties</h3>
+        <ul>
+            <li>Commutative: 3 + 5 = 5 + 3</li>
+            <li>Associative: (2 + 3) + 4 = 2 + (3 + 4)</li>
+            <li>Identity: Adding zero changes nothing.</li>
+        </ul>
+
+        <div class="example">
+            12 + 18 = 30
+        </div>
+    </div>
+    <button class="action" onclick="showLesson('subtraction')">Next lesson →</button>
+</section>
+
+<section id="subtraction" class="lesson">
+    <div class="card">
+        <h2>2. Subtraction (−)</h2>
+        <p>Subtraction removes an amount from a number or finds the difference between two numbers.</p>
+
+        <div class="example">
+            10 − 4 = 6
+        </div>
+
+        <h3>How does it work?</h3>
+        <p>If you have 10 apples and give away 4, you have 6 remaining.</p>
+
+        <h3>Important properties</h3>
+        <ul>
+            <li>Subtraction is not commutative: 8 − 3 ≠ 3 − 8.</li>
+            <li>Subtracting zero changes nothing.</li>
+            <li>A number minus itself equals zero.</li>
+        </ul>
+
+        <div class="example">
+            25 − 13 = 12
+        </div>
+    </div>
+    <button class="action" onclick="showLesson('multiplication')">Next lesson →</button>
+</section>
+
+<section id="multiplication" class="lesson">
+    <div class="card">
+        <h2>3. Multiplication (×)</h2>
+        <p>Multiplication is repeated addition.</p>
+
+        <div class="example">
+            4 × 3 = 12
+        </div>
+
+        <h3>How does it work?</h3>
+        <p>4 × 3 means adding 4 three times:</p>
+
+        <div class="example">
+            4 + 4 + 4 = 12
+        </div>
+
+        <h3>Important properties</h3>
+        <ul>
+            <li>Commutative: 3 × 4 = 4 × 3</li>
+            <li>Associative: (2 × 3) × 4 = 2 × (3 × 4)</li>
+            <li>Identity: Any number multiplied by 1 stays the same.</li>
+            <li>Zero: Any number multiplied by 0 equals 0.</li>
+        </ul>
+
+        <div class="example">
+            12 × 8 = 96
+        </div>
+    </div>
+    <button class="action" onclick="showLesson('division')">Next lesson →</button>
+</section>
+
+<section id="division" class="lesson">
+    <div class="card">
+        <h2>4. Division (÷)</h2>
+        <p>Division splits a number into equal groups.</p>
+
+        <div class="example">
+            20 ÷ 4 = 5
+        </div>
+
+        <h3>How does it work?</h3>
+        <p>If you have 20 apples and divide them equally between 4 people, each person gets 5 apples.</p>
+
+        <h3>Important properties</h3>
+        <ul>
+            <li>Division is not commutative.</li>
+            <li>Dividing by 1 leaves the number unchanged.</li>
+            <li>A nonzero number divided by itself equals 1.</li>
+            <li>Division by zero is undefined.</li>
+        </ul>
+
+        <div class="example">
+            144 ÷ 12 = 12
+        </div>
+    </div>
+    <button class="action" onclick="showLesson('pemdas')">Next lesson →</button>
+</section>
+
+<section id="pemdas" class="lesson">
+    <div class="card">
+        <h2>5. Order of Operations (PEMDAS)</h2>
+        <p>When an expression contains multiple operations, you must follow a specific order.</p>
+
+        <h3>PEMDAS stands for:</h3>
+        <ol>
+            <li><b>P</b> – Parentheses</li>
+            <li><b>E</b> – Exponents</li>
+            <li><b>MD</b> – Multiplication and Division (left to right)</li>
+            <li><b>AS</b> – Addition and Subtraction (left to right)</li>
+        </ol>
+
+        <h3>Example</h3>
+        <div class="example">
+            3 + 4 × 2
+        </div>
+
+        <p>Step 1: Multiply first.</p>
+        <div class="example">3 + 8</div>
+
+        <p>Step 2: Add.</p>
+        <div class="example">11</div>
+
+        <p><b>Answer: 11</b></p>
+
+        <h3>Another example</h3>
+        <div class="example">
+            (5 + 3) × 2²
+        </div>
+        <p>Parentheses: 8 × 2²</p>
+        <p>Exponents: 8 × 4</p>
+        <p>Multiplication: 32</p>
+        <b>Answer: 32</b>
+    </div>
+    <button class="action" onclick="showLesson('practice')">Start practicing →</button>
+</section>
+
+<section id="practice" class="lesson">
+    <div class="card">
+        <h2>📝 Arithmetic Practice</h2>
+        <p>Test your knowledge with randomly generated questions!</p>
+
+        <h3 id="question">Click New Question to begin.</h3>
+
+        <input type="number" id="answer" placeholder="Your answer"
+            onkeydown="if(event.key==='Enter') checkAnswer()">
+
+        <br><br>
+
+        <button class="action" onclick="checkAnswer()">Check answer</button>
+        <button class="action" onclick="newQuestion()">New question</button>
+
+        <p id="feedback"></p>
+
+        <hr>
+
+        <h3>Score</h3>
+        <p>Correct: <span id="score">0</span></p>
+        <p>Attempted: <span id="attempted">0</span></p>
+        <p>Accuracy: <span id="accuracy">0%</span></p>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    Arithmetic Academy | Keep learning, keep improving!
+</footer>
+
+<script>
+let correctAnswer = 0;
+let answered = false;
+
+let score = 0;
+let attempted = 0;
+
+function showLesson(id) {
+    document.querySelectorAll('.lesson').forEach(section => {
+        section.classList.remove('active');
+    });
+
+    document.getElementById(id).classList.add('active');
+}
+
+function newQuestion() {
+    let operations = ['+', '-', '×', '÷'];
+    let operation = operations[Math.floor(Math.random() * 4)];
+
+    let a, b;
+
+    if (operation === '+') {
+        a = Math.floor(Math.random() * 100) + 1;
+        b = Math.floor(Math.random() * 100) + 1;
+        correctAnswer = a + b;
+    }
+
+    if (operation === '-') {
+        a = Math.floor(Math.random() * 100) + 1;
+        b = Math.floor(Math.random() * a) + 1;
+        correctAnswer = a - b;
+    }
+
+    if (operation === '×') {
+        a = Math.floor(Math.random() * 12) + 1;
+        b = Math.floor(Math.random() * 12) + 1;
+        correctAnswer = a * b;
+    }
+
+    if (operation === '÷') {
+        b = Math.floor(Math.random() * 12) + 1;
+        correctAnswer = Math.floor(Math.random() * 12) + 1;
+        a = b * correctAnswer;
+    }
+
+    document.getElementById('question').textContent =
+        `${a} ${operation} ${b} = ?`;
+
+    document.getElementById('answer').value = '';
+    document.getElementById('feedback').textContent = '';
+
+    answered = false;
+    document.getElementById('answer').focus();
+}
+
+function checkAnswer() {
+    if (answered) {
+        document.getElementById('feedback').textContent =
+            'You already answered this question. Try a new one!';
+        return;
+    }
+
+    let input = document.getElementById('answer').value;
+
+    if (input.trim() === '') {
+        document.getElementById('feedback').textContent =
+            'Please enter an answer!';
+        return;
+    }
+
+    attempted++;
+    answered = true;
+
+    if (Number(input) === correctAnswer) {
+        score++;
+        document.getElementById('feedback').textContent =
+            '✓ Correct! Great job!';
+        document.getElementById('feedback').style.color = 'green';
+    } else {
+        document.getElementById('feedback').textContent =
+            `✗ Incorrect. The correct answer was ${correctAnswer}.`;
+        document.getElementById('feedback').style.color = 'red';
+    }
+
+    updateScore();
+}
+
+function updateScore() {
+    document.getElementById('score').textContent = score;
+    document.getElementById('attempted').textContent = attempted;
+
+    let accuracy = attempted === 0 ? 0 :
+        Math.round(score / attempted * 100);
+
+    document.getElementById('accuracy').textContent = accuracy + '%';
+
+    document.getElementById('total').textContent = attempted;
+    document.getElementById('correct').textContent = score;
+
+    document.getElementById('progressBar').style.width =
+        accuracy + '%';
+}
+
+</script>
+
+</body>
+</html>
