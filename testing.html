@@ -1,0 +1,46 @@
+<script>
+(async () => {
+    const params = new URLSearchParams(window.location.search);
+    const encoded = params.get("t");
+
+    let validTimestamp = false;
+
+    try {
+        const bytes = Uint8Array.from(
+            atob(encoded),
+            c => c.charCodeAt(0)
+        );
+
+        if (bytes.length === 8) {
+            const timestamp = Number(
+                new DataView(bytes.buffer).getBigUint64(0)
+            );
+
+            const now = Math.floor(Date.now() / 1000);
+
+            validTimestamp =
+                timestamp <= now &&
+                now - timestamp < 86400;
+        }
+    } catch (e) {}
+
+    // Browser connectivity status (not specifically Wi-Fi)
+    const wifiOff = !navigator.onLine;
+
+    if (!(validTimestamp && wifiOff)) {
+        const overlay = document.createElement("div");
+
+        Object.assign(overlay.style, {
+            position: "fixed",
+            inset: "0",
+            width: "100vw",
+            height: "100vh",
+            background: "black",
+            zIndex: "2147483647"
+        });
+
+        document.documentElement.appendChild(overlay);
+    }
+})();
+</script>
+<h1>Website Loaded</h1>
