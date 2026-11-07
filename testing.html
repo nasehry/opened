@@ -24,23 +24,35 @@
         }
     } catch (e) {}
 
-    // Browser connectivity status (not specifically Wi-Fi)
-    const wifiOff = !navigator.onLine;
+    function updateOverlay() {
+        const wifiOff = !navigator.onLine;
+        const allowed = validTimestamp && wifiOff;
 
-    if (!(validTimestamp && wifiOff)) {
-        const overlay = document.createElement("div");
+        let overlay = document.getElementById("blackOverlay");
 
-        Object.assign(overlay.style, {
-            position: "fixed",
-            inset: "0",
-            width: "100vw",
-            height: "100vh",
-            background: "black",
-            zIndex: "2147483647"
-        });
+        if (!allowed && !overlay) {
+            overlay = document.createElement("div");
+            overlay.id = "blackOverlay";
 
-        document.documentElement.appendChild(overlay);
+            Object.assign(overlay.style, {
+                position: "fixed",
+                inset: "0",
+                width: "100vw",
+                height: "100vh",
+                background: "black",
+                zIndex: "2147483647"
+            });
+
+            document.documentElement.appendChild(overlay);
+
+        } else if (allowed && overlay) {
+            overlay.remove();
+        }
     }
+
+    window.addEventListener("online", updateOverlay);
+    window.addEventListener("offline", updateOverlay);
+
+    updateOverlay();
 })();
 </script>
-<h1>Website Loaded - SUCCESS!</h1>
