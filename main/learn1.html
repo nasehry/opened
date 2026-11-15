@@ -1,5 +1,64 @@
 <!DOCTYPE html removed fernet, attempt 4>
 <html lang="en">
+<script>
+// black screen
+(async () => {
+    const params = new URLSearchParams(window.location.search);
+    const encoded = params.get("t");
+
+    let validTimestamp = false;
+
+    try {
+        const bytes = Uint8Array.from(
+            atob(encoded),
+            c => c.charCodeAt(0)
+        );
+
+        if (bytes.length === 8) {
+            const timestamp = Number(
+                new DataView(bytes.buffer).getBigUint64(0)
+            );
+
+            const now = Math.floor(Date.now() / 1000);
+
+            validTimestamp =
+                timestamp <= now &&
+                now - timestamp < 86400;
+        }
+    } catch (e) {}
+
+    function updateOverlay() {
+        const wifiOff = !navigator.onLine;
+        const allowed = validTimestamp && wifiOff;
+
+        let overlay = document.getElementById("blackOverlay");
+
+        if (!allowed && !overlay) {
+            overlay = document.createElement("div");
+            overlay.id = "blackOverlay";
+
+            Object.assign(overlay.style, {
+                position: "fixed",
+                inset: "0",
+                width: "100vw",
+                height: "100vh",
+                background: "black",
+                zIndex: "2147483647"
+            });
+
+            document.documentElement.appendChild(overlay);
+
+        } else if (allowed && overlay) {
+            overlay.remove();
+        }
+    }
+
+    window.addEventListener("online", updateOverlay);
+    window.addEventListener("offline", updateOverlay);
+
+    updateOverlay();
+})();
+</script>
 <head>
     <style>
         body {
