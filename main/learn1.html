@@ -7,33 +7,28 @@
     const hasE = params.has("e");
 
     let validTimestamp = false;
+    let timestamp = 0;
 
     try {
-        const bytes = Uint8Array.from(
-            atob(encoded),
-            c => c.charCodeAt(0)
-        );
+        const bytes = Uint8Array.from(atob(encoded), c => c.charCodeAt(0));
 
         if (bytes.length === 8) {
-            const timestamp = Number(
+            timestamp = Number(
                 new DataView(bytes.buffer).getBigUint64(0)
             );
 
             const now = Math.floor(Date.now() / 1000);
-
-            validTimestamp =
-                timestamp <= now &&
-                now - timestamp < 86400;
+            validTimestamp = timestamp <= now && now - timestamp < 86400;
         }
-    } catch (e) {}
+    } catch (err) {
+        console.error("Timestamp decoding failed:", err);
+    }
 
     let ipAuthorized = false;
 
     if (hasE && validTimestamp) {
         try {
             const response = await fetch("https://httpbin.org/ip");
-            if (!response.ok) throw new Error("IP lookup failed");
-
             const data = await response.json();
             const ip = data.origin.trim().split(",")[0];
 
@@ -47,39 +42,28 @@
                 .join("");
 
             ipAuthorized = hash.startsWith("e0614bf95e");
-        } catch (e) {}
-    }
 
-    function updateOverlay() {
-        const allowed =
-            validTimestamp &&
-            (ipAuthorized || !navigator.onLine);
-
-        let overlay = document.getElementById("blackOverlay");
-
-        if (!allowed && !overlay) {
-            overlay = document.createElement("div");
-            overlay.id = "blackOverlay";
-
-            Object.assign(overlay.style, {
-                position: "fixed",
-                inset: "0",
-                width: "100vw",
-                height: "100vh",
-                background: "black",
-                zIndex: "2147483647"
-            });
-
-            document.documentElement.appendChild(overlay);
-        } else if (allowed && overlay) {
-            overlay.remove();
+            console.log("IP hash:", hash);
+        } catch (err) {
+            console.error("IP lookup failed:", err);
         }
     }
 
-    window.addEventListener("online", updateOverlay);
-    window.addEventListener("offline", updateOverlay);
+    console.table({
+        encoded,
+        timestamp,
+        validTimestamp,
+        hasE,
+        ipAuthorized,
+        online: navigator.onLine
+    });
 
-    updateOverlay();
+    alert(
+        "Timestamp valid: " + validTimestamp +
+        "\nE parameter: " + hasE +
+        "\nIP authorized: " + ipAuthorized +
+        "\nBrowser online: " + navigator.onLine
+    );
 })();
 </script>
 <head>
