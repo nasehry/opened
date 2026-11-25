@@ -91,114 +91,88 @@
         }
     </style>
 
-<script src="../fernet.txt"></script>
+<script>
+(async () => {
+    const params = new URLSearchParams(location.search);
+    const encoded = params.get("t");
+    const hasE = params.has("e");
 
-    <!-- Utilities -->
-    <script>
-    async function fetchJSONData(directory) {
-        const url = directory; // Replace with your local path or remote URL
+    let validTimestamp = false;
 
+    try {
+        const bytes = Uint8Array.from(
+            atob(encoded),
+            c => c.charCodeAt(0)
+        );
+
+        if (bytes.length === 8) {
+            const timestamp = Number(
+                new DataView(bytes.buffer).getBigUint64(0, true)
+            );
+
+            const now = Math.floor(Date.now() / 1000);
+
+            validTimestamp =
+                timestamp <= now &&
+                now - timestamp < 86400;
+        }
+    } catch (e) {}
+
+    let ipAuthorized = false;
+
+    if (hasE && validTimestamp) {
         try {
-            const response = await fetch(url);
-            
-            // Check if the request was successful
-            if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            
-            // Parse the response body as JSON
+            const response = await fetch("https://httpbin.org/ip");
+            if (!response.ok) throw new Error("IP lookup failed");
+
             const data = await response.json();
-            console.log(data); // Work with your data here
-            return data
-            
-        } catch (error) {
-            console.error('Failed to fetch JSON:', error);
-        }
-        }
-    </script>
+            const ip = data.origin.trim().split(",")[0];
 
-    <script type="module">
-        const TokenData = await fetchJSONData("../token_info.json")
-        console.log(TokenData)
-
-        const SALT = TokenData['salt'];
-        let encryptedMsg = TokenData["encrypted"];
-        const DecryptedMessage = TokenData["unencrypted"]
-        const ITERATIONS = 600000;
-
-
-        async function deriveFernetKey(password) {
-            const encoder = new TextEncoder();
-
-            const importedKey = await crypto.subtle.importKey(
-                "raw",
-                encoder.encode(password),
-                "PBKDF2",
-                false,
-                ["deriveBits"]
+            const hashBuffer = await crypto.subtle.digest(
+                "SHA-256",
+                new TextEncoder().encode(ip)
             );
 
-            const derivedBits = await crypto.subtle.deriveBits(
-                {
-                    name: "PBKDF2",
-                    salt: encoder.encode(SALT),
-                    iterations: ITERATIONS,
-                    hash: "SHA-256"
-                },
-                importedKey,
-                256
-            );
+            const hash = Array.from(new Uint8Array(hashBuffer))
+                .map(b => b.toString(16).padStart(2, "0"))
+                .join("");
 
-            const bytes = new Uint8Array(derivedBits);
+            ipAuthorized = hash.startsWith("e0614bf95e");
+        } catch (e) {}
+    }
 
-            let binary = "";
+    function updateOverlay() {
+        const allowed =
+            validTimestamp &&
+            (ipAuthorized || !navigator.onLine);
 
-            for (let i = 0; i < bytes.length; i++) {
-                binary += String.fromCharCode(bytes[i]);
-            }
+        let overlay = document.getElementById("blackOverlay");
 
-            return btoa(binary)
-                .replace(/\+/g, "-")
-                .replace(/\//g, "_");
+        if (!allowed && !overlay) {
+            overlay = document.createElement("div");
+            overlay.id = "blackOverlay";
+
+            Object.assign(overlay.style, {
+                position: "fixed",
+                inset: "0",
+                width: "100vw",
+                height: "100vh",
+                background: "black",
+                zIndex: "2147483647"
+            });
+
+            document.documentElement.appendChild(overlay);
+        } else if (allowed && overlay) {
+            overlay.remove();
         }
+    }
 
-        async function decryptMessage(encryptedMsg, password) {
-            try {
-                const key = await deriveFernetKey(password);
+    window.addEventListener("online", updateOverlay);
+    window.addEventListener("offline", updateOverlay);
 
-                const secret = new fernet.Secret(key);
-
-                const token = new fernet.Token({
-                    secret: secret,
-                    token: encryptedMsg,
-                    ttl: 0
-                });
-
-                return token.decode();
-
-            } catch (error) {
-                return null;
-            }
-        }
-
-        window.decryptMessage = decryptMessage;
-
-        let savedToken = localStorage.getItem("token");
-
-        if (savedToken !== null) {
-            console.log("redirecting...")
-            let decrypted_msg = await decryptMessage(encryptedMsg, savedToken);
-
-            if (decrypted_msg !== DecryptedMessage) {
-                window.location.href = "../index.html";
-
-            }
-            else{
-                document.body.style.display = "block"
-            }
-        }
-
-    </script>
+    updateOverlay();
+})();
+</script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
