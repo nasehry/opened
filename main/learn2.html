@@ -90,6 +90,29 @@
             opacity:80%;
         }
     </style>
+    <!-- Utilities -->
+    <script>
+    async function fetchJSONData(directory) {
+        const url = directory; // Replace with your local path or remote URL
+
+        try {
+            const response = await fetch(url);
+            
+            // Check if the request was successful
+            if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            
+            // Parse the response body as JSON
+            const data = await response.json();
+            console.log(data); // Work with your data here
+            return data
+            
+        } catch (error) {
+            console.error('Failed to fetch JSON:', error);
+        }
+        }
+    </script>
 
 <script>
 (async () => {
